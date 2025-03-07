@@ -60,6 +60,35 @@ public class ASMulator {
 
                 }
 
+                //sub
+                else if(instructionParts[0].equals("sub") && instructionParts.length == 3){
+
+                    for(int j = 0; j < varValues.length; j++){
+
+                        if(varNames[j].equals(instructionParts[1])){
+
+                            varValues[j] -= Integer.parseInt(instructionParts[2]);
+
+                        }
+
+                    }
+
+                }
+
+                //mul
+                else if(instructionParts[0].equals("mul") && instructionParts.length == 3){
+
+                    for(int j = 0; j < varValues.length; j++){
+
+                        if(varNames[j].equals(instructionParts[1])){
+
+                            varValues[j] *= Integer.parseInt(instructionParts[2]);
+
+                        }
+
+                    }
+
+                }
             }
 
         } catch (FileNotFoundException e) {
