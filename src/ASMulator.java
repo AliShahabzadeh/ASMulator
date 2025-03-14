@@ -24,7 +24,7 @@ public class ASMulator {
 
             int numLines = Integer.parseInt(br.readLine());
 
-            for(int i = 0; i < 10; i++){
+            for(int i = 0; i < numLines; i++){
 
                 String instruction = br.readLine();
                 String[] instructionParts = instruction.split("\\s+");
@@ -133,13 +133,6 @@ public class ASMulator {
         } catch (IOException e) {
             System.out.println(e.toString());
         }
-        
-        int temp = 0;
-        
-        for(int i = 0; i < varValues.length; i++)
-            temp+=varValues[i];
-        
-        System.out.println(temp + "");
 
     }
 
