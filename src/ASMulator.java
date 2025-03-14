@@ -12,6 +12,9 @@ public class ASMulator {
 
         String[] varNames = new String[0];
         int[] varValues = new int[0];
+        
+        String[] labNames = new String[0];
+        int[] labLines = new int[0];
 
         BufferedReader br = null;
 
@@ -24,9 +27,9 @@ public class ASMulator {
             for(int i = 0; i < numLines; i++){
 
                 String instruction = br.readLine();
-                String[] instructionParts = instruction.split(" ");
+                String[] instructionParts = instruction.split("\\s+");
 
-                //add
+                // add <var> <num>
                 if(instructionParts[0].equals("add") && instructionParts.length == 3){
 
                     boolean find = false;
@@ -60,7 +63,7 @@ public class ASMulator {
 
                 }
 
-                //sub
+                // sub <var> <num>
                 else if(instructionParts[0].equals("sub") && instructionParts.length == 3){
 
                     for(int j = 0; j < varValues.length; j++){
@@ -75,7 +78,7 @@ public class ASMulator {
 
                 }
 
-                //mul
+                // mul <var> <num>
                 else if(instructionParts[0].equals("mul") && instructionParts.length == 3){
 
                     for(int j = 0; j < varValues.length; j++){
@@ -88,6 +91,40 @@ public class ASMulator {
 
                     }
 
+                }
+                
+                // lab <name>
+                else if(instructionParts[0].equals("lab") && instructionParts.length == 2){
+                    
+                    labNames = Arrays.copyOf(labNames, labNames.length + 1);
+                    labNames[labNames.length - 1] = instructionParts[1];
+
+                    labLines = Arrays.copyOf(labLines, labLines.length + 1);
+                    labLines[labLines.length - 1] = i;
+                    
+                }
+                
+                // jmp <var> <num> <name>
+                else if(instructionParts[0].equals("jmp") && instructionParts.length == 4){
+                    
+                    for(int j = 0; j < varNames.length; j++){
+                        
+                        if(varNames[j].equals(instructionParts[1]) && varValues[j] == Integer.parseInt(instructionParts[2])){
+                            
+                            for(int k = 0; k < labNames.length; k++){
+                                
+                                if(labNames[k].equals(instructionParts[3])){
+                                    
+                                    i = labLines[k];
+                                    
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
                 }
             }
 
